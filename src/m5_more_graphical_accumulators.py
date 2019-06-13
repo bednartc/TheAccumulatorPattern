@@ -28,8 +28,8 @@ import rosegraphics as rg
 def main():
     """ Calls the   TEST   functions in this module. """
     #run_test_draw_squares_from_circle()
-    #run_test_draw_circles_from_rectangle()
-    run_test_draw_lines_from_rectangles()
+    run_test_draw_circles_from_rectangle()
+    #run_test_draw_lines_from_rectangles()
 
 
 def run_test_draw_squares_from_circle():
@@ -152,10 +152,10 @@ def run_test_draw_circles_from_rectangle():
     title = title + ' yay'
     window1 = rg.RoseWindow(650, 350, title)
 
-    corner1 = rg.Point(50, 100)
-    corner2 = rg.Point(100, 300)
+    corner1 = rg.Point(150, 100)
+    corner2 = rg.Point(125, 120)
     rectangle = rg.Rectangle(corner1, corner2)
-    draw_circles_from_rectangle(3, 2,rectangle, window1)
+    draw_circles_from_rectangle(3, 2, rectangle, window1)
 
     corner1 = rg.Point(550, 200)
     corner2 = rg.Point(400, 100)
@@ -220,19 +220,54 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
     rectangle.attach_to(window)
     corner1 = rectangle.corner_1
     corner2 = rectangle.corner_2
-    x1 = corner1.x
-    y1 = corner1.y
-    x2 = corner2.x
-    y2 = corner2.y
-    radius_height = abs(0.5 * (y1 - y2))
-    radius_width = abs(0.5 * (x1 - x2))
-    center_height = rg.Point(x1 - radius_height, y1 * 4)
-    center_width = rg.Point(x2 * 1.25, y2)
+    center_y = (corner1.y + corner2.y) / 2
 
-    circle = rg.Circle(center_height, radius_height)
-    circle.attach_to(window)
-    circle = rg.Circle(center_width, radius_width)
-    circle.attach_to(window)
+    if corner1.y > corner2.y:
+        radius_height = (corner1.y - corner2.y) / 2
+    else:
+        radius_height = (corner2.y - corner1.y) / 2
+
+    if corner1.x > corner2.x:
+        distance_left = corner1.x - corner2.x
+        center_x = corner1.x - distance_left - radius_height
+        for _ in range (m):
+            center = rg.Point(center_x, center_y)
+            circle = rg.Circle(center, radius_height)
+            circle.attach_to(window)
+            center_x = center_x - 2 * radius_height
+
+    else:
+        center_x = corner1.x - radius_height
+        for _ in range(m):
+            center = rg.Point(center_x, center_y)
+            circle = rg.Circle(center, radius_height)
+            circle.attach_to(window)
+            center_x = center_x - 2 * radius_height
+
+    center_x = (corner1.x + corner2.x) / 2
+    if corner1.x > corner2.x:
+        radius_width = (corner1.x - corner2.x) / 2
+    else:
+        radius_width = (corner2.x - corner1.x) / 2
+
+    if corner1.y > corner2.y:
+        distance_up = corner1.y - corner2.y
+        center_y = corner1.y - distance_up - radius_width
+        for _ in range(n):
+            center = rg.Point(center_x, center_y)
+            circle = rg.Circle(center, radius_width)
+            circle.attach_to(window)
+            center_y = center_y - 2 * radius_width
+    else:
+        center_y = corner1.y - radius_width
+        for _ in range(n):
+            center = rg.Point(center_x, center_y)
+            circle = rg.Circle(center, radius_width)
+            circle.attach_to(window)
+            center_y = center_y - 2 * radius_width
+
+
+
     window.render()
 
 
