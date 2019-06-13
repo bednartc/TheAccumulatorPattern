@@ -28,8 +28,8 @@ import rosegraphics as rg
 def main():
     """ Calls the   TEST   functions in this module. """
     #run_test_draw_squares_from_circle()
-    run_test_draw_circles_from_rectangle()
-    #run_test_draw_lines_from_rectangles()
+    #run_test_draw_circles_from_rectangle()
+    run_test_draw_lines_from_rectangles()
 
 
 def run_test_draw_squares_from_circle():
@@ -365,27 +365,51 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
     rectangle1.attach_to(window)
     rectangle2.attach_to(window)
 
-    corner1 = rectangle1.corner_1
-    corner2 = rectangle1.corner_2
+    color1 = rectangle1.outline_color
+    color2 = rectangle2.outline_color
 
-    x1 = corner1.x
-    y1 = corner1.y
-    x2 = corner2.x
-    y2 = corner2.y
+    rectangle1_corner1 = rectangle1.corner_1
+    rectangle1_corner2 = rectangle1.corner_2
+    rectangle2_corner1 = rectangle2.corner_1
+    rectangle2_corner2 = rectangle2.corner_2
 
-    xc = (x1 + x2) / 2
-    yc = (y1 + y2) / 2
-    xl = xc - x1
-    yl = yc - y1
+    rec1_center_x = (rectangle1_corner1.x + rectangle1_corner2.x) / 2
+    rec1_center_y = (rectangle1_corner1.y + rectangle1_corner2.y) / 2
+    rec2_center_x = (rectangle2_corner1.x + rectangle2_corner2.x) / 2
+    rec2_center_y = (rectangle2_corner1.y + rectangle2_corner2.y) / 2
 
+    rec1_center = rg.Point(rec1_center_x, rec1_center_y)
+    rec2_center = rg.Point(rec2_center_x, rec2_center_y)
 
-    for _ in range(n):
-        center1 = rg.Point(xc, yc)
-        center2 = rg.Point(100, 100)
-        line = rg.Line(center1, center2)
+    line = rg.Line(rec1_center, rec2_center)
+    line.attach_to(window)
+
+    if rectangle1_corner1.y > rectangle1_corner2.y:
+        distance_y = rectangle1_corner1.y - rec1_center_y
+    else:
+        distance_y = rectangle1_corner2.y - rec1_center_y
+
+    if rectangle1_corner1.x > rectangle1_corner2.x:
+        distance_x = rectangle1_corner1.x - rec1_center_x
+    else:
+        distance_x = rectangle1_corner2.x - rec1_center_x
+
+    change_dx = distance_x
+    change_dy = distance_y
+    counter = 0
+    for _ in range (n):
+        point = rg.Point(rec1_center_x - change_dx, rec1_center_y + change_dy)
+        point2 = rg.Point(rec2_center_x - change_dx, rec2_center_y + change_dy)
+        line = rg.Line(point, point2)
+        if counter % 2 == 0:
+            line.color = color2
+        else:
+            line.color = color1
         line.attach_to(window)
-        xc = xc - xl
-        yc = yc + yl
+        change_dy = change_dy + distance_y
+        change_dx = change_dx + distance_x
+        counter = counter + 1
+
     window.render()
 
 # ----------------------------------------------------------------------

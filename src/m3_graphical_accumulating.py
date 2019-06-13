@@ -195,13 +195,6 @@ def draw_lines(n, point, window):
         line.attach_to(window)
         endpoint = endpoint - distance
 
-    # distance = (point.y + 100) / n
-    # endpoint = point.y + (distance / 2) + (distance * n) / 2
-    # for _ in range(n):
-    #     point3 = rg.Point(point.x + 100, endpoint)
-    #     line = rg.Line(point1, point3)
-    #     line.attach_to(window)
-    #     endpoint = endpoint - distance
 
     window.render()
 
