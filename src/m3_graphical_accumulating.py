@@ -186,14 +186,22 @@ def draw_lines(n, point, window):
     ####################################################################
     # ------------------------------------------------------------------
 
-    x = point.x
-    y = point.y
-    point1 = rg.Point(x, y)
+    point1 = rg.Point(point.x, point.y)
+    distance = 200 / (n + 1)
+    endpoint = point.y + 100 - distance
     for _ in range(n):
-        point2 = rg.Point(x + 100, y - 100)
+        point2 = rg.Point(point.x + 100, endpoint)
         line = rg.Line(point1, point2)
         line.attach_to(window)
-        y = y + ((y + 100) / n)
+        endpoint = endpoint - distance
+
+    # distance = (point.y + 100) / n
+    # endpoint = point.y + (distance / 2) + (distance * n) / 2
+    # for _ in range(n):
+    #     point3 = rg.Point(point.x + 100, endpoint)
+    #     line = rg.Line(point1, point3)
+    #     line.attach_to(window)
+    #     endpoint = endpoint - distance
 
     window.render()
 

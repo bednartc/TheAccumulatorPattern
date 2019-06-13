@@ -329,41 +329,28 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
 
     rectangle1.attach_to(window)
     rectangle2.attach_to(window)
-    color1 = rectangle1.outline_color
-    color2 = rectangle2.outline_color
+
     corner1 = rectangle1.corner_1
     corner2 = rectangle1.corner_2
+
     x1 = corner1.x
-    x2 = corner2.x
     y1 = corner1.y
+    x2 = corner2.x
     y2 = corner2.y
 
-    corner3 = rectangle2.corner_1
-    corner4 = rectangle2.corner_2
-    x3 = corner3.x
-    x4 = corner4.x
-    y3 = corner3.y
-    y4 = corner4.y
-
-    xp1 = (x1 + x2) / 2
-    xp2 = (x3 + x4) / 2
-    yp1 = (y1 + y2) / 2
-    yp2 = (y3 + y4) / 2
-
-    bot_left_corner = rg.Point(x1, y1)
+    xc = (x1 + x2) / 2
+    yc = (y1 + y2) / 2
+    xl = xc - x1
+    yl = yc - y1
 
 
     for _ in range(n):
-        center1 = rg.Point(xp1, yp1)
-        center2 = rg.Point(xp2, yp2 )
+        center1 = rg.Point(xc, yc)
+        center2 = rg.Point(100, 100)
         line = rg.Line(center1, center2)
         line.attach_to(window)
-        xp1 = xp1 - (xp1 - x1)
-        yp1 = yp1 - (yp1 - y1)
-        print(xp1, yp1)
-        xp2 = xp2 - 0
-        yp2 = yp2 - 0
-
+        xc = xc - xl
+        yc = yc + yl
     window.render()
 
 # ----------------------------------------------------------------------
