@@ -28,7 +28,7 @@ import rosegraphics as rg
 def main():
     """ Calls the   TEST   functions in this module. """
     #run_test_draw_squares_from_circle()
-    #run_test_draw_circles_from_rectangle()
+    run_test_draw_circles_from_rectangle()
     run_test_draw_lines_from_rectangles()
 
 
@@ -149,19 +149,35 @@ def run_test_draw_circles_from_rectangle():
     # ------------------------------------------------------------------
 
     title = 'Tests 1 and 2 of DRAW_CIRCLES_FROM_RECTANGLES: '
-    title = title + ' yay'
+    title = title + ' 3 circles left 2 circles up and 5 circles left and 3 circles up'
     window1 = rg.RoseWindow(650, 350, title)
 
     corner1 = rg.Point(150, 100)
     corner2 = rg.Point(125, 120)
     rectangle = rg.Rectangle(corner1, corner2)
+    rectangle.fill_color = 'green'
+    rectangle.outline_color = 'red'
     draw_circles_from_rectangle(3, 2, rectangle, window1)
 
-    corner1 = rg.Point(550, 200)
-    corner2 = rg.Point(400, 100)
+    corner1 = rg.Point(375, 250)
+    corner2 = rg.Point(300, 300)
     rectangle = rg.Rectangle(corner1, corner2)
-    draw_circles_from_rectangle(2, 3, rectangle, window1)
+    rectangle.outline_color = 'blue'
+    draw_circles_from_rectangle(5, 3, rectangle, window1)
     window1.close_on_mouse_click()
+
+    title = 'Test 3 of DRAW_CIRCLES_FROM_RECTANGLE: '
+    title += ' '
+    window2 = rg.RoseWindow(525, 400, title)
+
+    # Test 3:
+    corner1 = rg.Point(200, 250)
+    corner2 = rg.Point(225, 300)
+    rectangle = rg.Rectangle(corner1, corner2)
+    rectangle.fill_color = 'red'
+    draw_circles_from_rectangle(4, 9, rectangle, window2)
+
+    window2.close_on_mouse_click()
 
 def draw_circles_from_rectangle(m, n, rectangle, window):
     """
@@ -218,6 +234,8 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
     # ------------------------------------------------------------------
 
     rectangle.attach_to(window)
+    color_fill = rectangle.fill_color
+    color_out = rectangle.outline_color
     corner1 = rectangle.corner_1
     corner2 = rectangle.corner_2
     center_y = (corner1.y + corner2.y) / 2
@@ -233,6 +251,7 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
         for _ in range (m):
             center = rg.Point(center_x, center_y)
             circle = rg.Circle(center, radius_height)
+            circle.fill_color = color_fill
             circle.attach_to(window)
             center_x = center_x - 2 * radius_height
 
@@ -241,6 +260,7 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
         for _ in range(m):
             center = rg.Point(center_x, center_y)
             circle = rg.Circle(center, radius_height)
+            circle.fill_color = color_fill
             circle.attach_to(window)
             center_x = center_x - 2 * radius_height
 
@@ -256,6 +276,7 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
         for _ in range(n):
             center = rg.Point(center_x, center_y)
             circle = rg.Circle(center, radius_width)
+            circle.outline_color = color_out
             circle.attach_to(window)
             center_y = center_y - 2 * radius_width
     else:
@@ -263,6 +284,7 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
         for _ in range(n):
             center = rg.Point(center_x, center_y)
             circle = rg.Circle(center, radius_width)
+            circle.outline_color = color_out
             circle.attach_to(window)
             center_y = center_y - 2 * radius_width
 
@@ -348,7 +370,7 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
       :type window: rg.RoseWindow
       """
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # Done: 5. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # CONSIDER using the ACCUMULATOR IN GRAPHICS pattern,
@@ -382,6 +404,7 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
     rec2_center = rg.Point(rec2_center_x, rec2_center_y)
 
     line = rg.Line(rec1_center, rec2_center)
+    line.color = color1
     line.attach_to(window)
 
     if rectangle1_corner1.y > rectangle1_corner2.y:
