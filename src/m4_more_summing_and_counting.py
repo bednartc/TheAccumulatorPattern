@@ -12,8 +12,8 @@ in its "in graphics" form:
    IN GRAPHICS:   x = x + pixels
 
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Travis Bednarek.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import math
 import builtins  # Never necessary, but here for pedagogical reasons
@@ -90,7 +90,7 @@ def run_test_sum_from():
     print('       actual (from my code):  ', answer_from_my_code)
 
 # ----------------------------------------------------------------------
-# TODO: 2.
+# Done: 2.
 #   When you have READ the above  run_test_sum_from  function,
 #   asking questions as needed, and you feel that you (mostly, at least)
 #   understand it, and you feel that you understand from the example:
@@ -114,7 +114,7 @@ def sum_from(m, n):
         sum_from(6, 9) returns 6 + 7 + 8 + 9, that is, 30.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # Done: 3. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # IMPORTANT:  Your solution MUST
@@ -125,6 +125,12 @@ def sum_from(m, n):
     #   of the RANGE expression, if you happen to know them.
     # ------------------------------------------------------------------
 
+    sum_x = 0
+    x = n - m
+    for k in range (x + 1):
+        sum_x = sum_x + m
+        m = m + 1
+    return sum_x
 
 def run_test_factorial():
     """ Tests the   factorial   function. """
@@ -156,6 +162,15 @@ def run_test_factorial():
     print('Test 2 expected (from oracle):', answer_from_oracle)
     print('       actual (from my code): ', answer_from_my_code)
 
+    print('Test 3 expected:', 2)
+    print('       actual: ', factorial(2))
+
+    print('Test 3 expected:', 5040)
+    print('       actual: ', factorial(7))
+
+    print('Test 3 expected:', 24)
+    print('       actual: ', factorial(4))
+
     # ------------------------------------------------------------------
     # TO DO: 4 (continued).
     # Below this comment, add 3 more test cases, at least two of which
@@ -173,12 +188,20 @@ def factorial(n):
         factorial(0) returns 1 (by definition).
     """
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # done: 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     # IMPORTANT:  Your solution MUST
     #   use an explicit    for ... in range(...):     statement.
     # ------------------------------------------------------------------
+
+    factorial = n
+    if n == 0:
+        return 1
+    else:
+        for k in range(n - 1):
+            factorial = factorial * (k + 1)
+        return factorial
 
 
 def run_test_count_cosines_from():

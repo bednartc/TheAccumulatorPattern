@@ -209,8 +209,8 @@ def run_test_count_sines_vs_cosines():
     # Below this comment, add 5 more test cases of your own choosing.
     # ------------------------------------------------------------------
 
-    expected = 100
-    answer = count_sines_vs_cosines(101)
+    expected = 4
+    answer = count_sines_vs_cosines(3)
     print('Test 1 expected:', expected)
     print('       actual:  ', answer)
 
@@ -254,7 +254,7 @@ def count_sines_vs_cosines(m):
 
     counter = 0
     n = -1 * m
-    for k in range(m):
+    for k in range(m + 1):
         if math.sin(k) > math.cos(k):
             counter = counter + 1
         if math.sin(n) > math.cos(n):
